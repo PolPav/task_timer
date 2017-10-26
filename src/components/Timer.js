@@ -3,50 +3,63 @@ import React, { Component } from 'react';
 class Timer extends Component {
 
   constructor(props) {
-
     super(props);
-    this.state = {past_time: 0, init:0, value: '', timeDefault: 0};
+
+    this.state = {
+
+            pastTime: 0,
+            value: '',
+            startTimer: 1,
+            buttonText: 'Start'
+    };
   }
 
-  toggleTimer = () => {
+  toggleTimer = (event) => {
 
     this.nowDate = Date.now();
-    let button = document.querySelector('button#toggleButton');
-    let timeResult = document.querySelector('h3#testText');
+    const elem = event.target;
+    const resultTime = elem.parentNode.previousSibling.firstChild.firstChild.textContent;
 
-      if(button.innerHTML === 'Start'){
+      if(this.state.startTimer === 1){
+
         this.timer = setInterval(
           () => this.differenceTime(),
           1000
         );
 
-        button.innerHTML = 'Stop';
+        this.setState({buttonText: 'Stop'});
+        this.state.startTimer = 0;
 
-      } else {
+      }
+
+      else if(this.state.startTimer === 0) {
 
         clearInterval(this.timer);
-        button.innerHTML = 'Start';
-        this.setState({value: timeResult.innerHTML});
+
+        this.setState({value: resultTime});
+        this.setState({buttonText: 'Start'});
+        this.state.startTimer = 1;
       }
   };
 
+
   differenceTime = () => {
 
-    this.setState({past_time: new Date() - this.nowDate});
+    this.setState({pastTime: new Date() - this.nowDate});
   };
 
-  render() {
+  initTimer = () => {
 
-    let past_time = Math.round(this.state.past_time / 1000);
-    let seconds = past_time % 60;
-        past_time = past_time - seconds;
-        past_time = Math.round(past_time / 60);
+    let pastTime = Math.round(this.state.pastTime / 1000);
+    let seconds = pastTime % 60;
 
-    let minutes = past_time % 60;
-        past_time = past_time - minutes;
-        past_time = Math.round(past_time / 60);
+    pastTime = pastTime - seconds;
+    pastTime = Math.round(pastTime / 60);
+    let minutes = pastTime % 60;
 
-    let hours = past_time % 60;
+    pastTime = pastTime - minutes;
+    pastTime = Math.round(pastTime / 60);
+    let hours = pastTime % 60;
 
       if(seconds < 10){
         seconds = "0"+seconds;
@@ -60,16 +73,23 @@ class Timer extends Component {
         hours = "0"+hours;
       }
 
+    return {seconds: seconds, minutes: minutes, hours: hours}
+  };
+
+  render() {
+
+    const timerInit = this.initTimer();
+
     return (
-      <div className={'wrap_timer'}>
-        <div className={'wrap_timer_stopped'}>
-          <h3 id={'testText'}>{hours+":"+minutes+":"+seconds}</h3>
+      <div className='wrap_timer'>
+        <div className='wrap_timer_stopped'>
+          <h3>{timerInit.hours+":"+timerInit.minutes+":"+timerInit.seconds}</h3>
         </div>
-        <div className={'wrap_timer_buttons'}>
-          <button id={'toggleButton'} className={'wrap_timer_button'} onClick={this.toggleTimer}>Start</button>
+        <div className='wrap_timer_buttons'>
+          <button id='toggleButton' className='wrap_timer_button' onClick={this.toggleTimer}>{this.state.buttonText}</button>
         </div>
         <div>
-          <h3 id={'stoppedTime'}>{this.state.value}</h3>
+          <h3>{this.state.value}</h3>
         </div>
       </div>
     );
