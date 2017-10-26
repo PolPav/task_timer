@@ -22,3 +22,19 @@ body {
   height: 200px;
   border-radius: 50%;
 }
+
+.wrap_timer_stopped{
+  margin-left: 45.5%;
+  text-align: center;
+  font-size: 20px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 1px lightskyblue solid;
+}
+
+.wrap_timer_stopped h3{
+  margin-top: 45%;
+  color: lightskyblue;
+}
+
