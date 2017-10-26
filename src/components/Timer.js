@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 class Timer extends Component {
 
   constructor(props) {
-    super(props);
 
+    super(props);
     this.state = {
 
-            pastTime: 0,
-            value: '',
-            startTimer: 1,
-            buttonText: 'Start'
+          pastTime: 0,
+          value: '',
+          startTimer: 1,
+          buttonText: 'Start'
     };
   }
 
@@ -61,17 +61,17 @@ class Timer extends Component {
     pastTime = Math.round(pastTime / 60);
     let hours = pastTime % 60;
 
-      if(seconds < 10){
-        seconds = "0"+seconds;
-      }
+    if(seconds < 10){
+      seconds = `0${seconds}`;
+    }
 
-      if(minutes < 10){
-        minutes = "0"+minutes;
-      }
+    if(minutes < 10){
+      minutes = `0${minutes}`;
+    }
 
-      if(hours < 10){
-        hours = "0"+hours;
-      }
+    if(hours < 10){
+      hours = `0${hours}`;
+    }
 
     return {seconds: seconds, minutes: minutes, hours: hours}
   };
