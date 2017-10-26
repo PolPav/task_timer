@@ -13,15 +13,21 @@ class App extends Component {
     this.state = {past_time: 0, init: 0};
   }
 
-  startTimer = () => {
-    this.timer = setInterval(
-      () => this.differenceTime(),
-      1000
-    );
-  };
+  toggleTimer = () => {
 
-  stopTimer = () => {
-    clearInterval(this.timer);
+    let button = document.getElementById('toggleButton');
+
+    if(button.innerHTML === 'Start'){
+        this.timer = setInterval(
+          () => this.differenceTime(),
+          1000
+        );
+      button.innerHTML = 'Stop';
+
+    } else {
+        clearInterval(this.timer);
+        button.innerHTML = 'Start';
+    }
   };
 
   differenceTime = () => {
@@ -55,8 +61,7 @@ class App extends Component {
       <div className={'wrap_timer'}>
         <input className={'wrap_timer_input'} value={hours+":"+minutes+":"+seconds}/>
         <div className={'wrap_timer_buttons'}>
-          <button className={'wrap_timer_button'} onClick={this.startTimer}>Start</button>
-          <button className={'wrap_timer_button'} onClick={this.stopTimer}>Stop</button>
+          <button id={"toggleButton"} className={'wrap_timer_button'} onClick={this.toggleTimer}>Start</button>
         </div>
 
         {/*<Provider store={store}>*/}
