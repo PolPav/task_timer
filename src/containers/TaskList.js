@@ -9,14 +9,14 @@ class TaskList extends Component{
   showTaskList(){
     return this.props.tasks.map((task) => {
       return (
-        <tr>
-          <td>{task.id}</td>
-          <td>{task.taskName}</td>
-          <td>{task.startTime}</td>
-          <td>{task.endTime}</td>
-          <td>{task.spentTime}</td>
-          <td><button>info</button></td>
-          <td><button>delete</button></td>
+        <tr key={task.id} className='wrap_timer_table_tr'>
+          <td className='wrap_timer_table_tr_td'>{task.id}</td>
+          <td className='wrap_timer_table_tr_td'>{task.taskName}</td>
+          <td className='wrap_timer_table_tr_td'>{task.startTime}</td>
+          <td className='wrap_timer_table_tr_td'>{task.endTime}</td>
+          <td className='wrap_timer_table_tr_td'>{task.spentTime}</td>
+          <td className='wrap_timer_table_tr_td'><button className='wrap_timer_table_button'>info</button></td>
+          <td className='wrap_timer_table_tr_td'><button className='wrap_timer_table_button'>delete</button></td>
         </tr>
       )
     })
@@ -26,16 +26,16 @@ class TaskList extends Component{
 
     return (
       <div>
-        <table>
+        <table className='wrap_timer_table'>
           <tbody>
-          <tr>
-            <td>№</td>
-            <td>Name of task</td>
-            <td>Time start</td>
-            <td>Time stop</td>
-            <td>Time spent</td>
-            <td><button>info</button></td>
-            <td><button>delete</button></td>
+          <tr className='wrap_timer_table_tr'>
+            <td className='wrap_timer_table_tr_td'>№</td>
+            <td className='wrap_timer_table_tr_td'>Name of task</td>
+            <td className='wrap_timer_table_tr_td'>Time start</td>
+            <td className='wrap_timer_table_tr_td'>Time stop</td>
+            <td className='wrap_timer_table_tr_td'>Time spent</td>
+            <td className='wrap_timer_table_tr_td'><button className='wrap_timer_table_button'>info</button></td>
+            <td className='wrap_timer_table_tr_td'><button className='wrap_timer_table_button'>delete</button></td>
           </tr>
             {this.showTaskList()}
           </tbody>
