@@ -24,9 +24,9 @@ class Timer extends Component {
           this.setState({workedTime: ''});
 
       } else {
-          this.setState({workedTime: res.hours+":"+res.minutes+":"+res.seconds});
+          this.setState({workedTime: `${res.hours}:${res.minutes}:${res.seconds}`});
       }
-    
+
       if(this.state.startTimer === 1){
           this.timer = setInterval(
             () => this.differenceTime(),
